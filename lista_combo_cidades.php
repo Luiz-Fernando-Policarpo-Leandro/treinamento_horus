@@ -5,10 +5,10 @@ function lista_combo_cidades($id = null)
 
 	$user = "root";
 	$host = "localhost";
-	$password = "Root@1234";
+	$password = "";
 	$dbName = "treinamento";
 
-    $conn = new mysqli($host, $user, $password, $dbName);
+    $conn = new mysqli("localhost", "root", "", "treinamento");
 
 	if ($conn->connect_error) {
 		// Falha na conexão — retorna lista vazia
