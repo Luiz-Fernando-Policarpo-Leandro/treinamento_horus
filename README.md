@@ -1,7 +1,10 @@
-# treinamento_horus
-Um crud estilisado usando php,html, csss e javascript
+# treinamento horus
 
-Este projeto foi feito com base no livro `PHP Programação orientada a objeto: 4ª Edição Pablo Dall’Oglio` como um desafio do treinamento da [horussistem](https://www.horussistemas.com/).
+Este projeto implementa um CRUD de pessoas utilizando PHP procedural,
+com separação simples entre camada de dados, templates HTML e scripts
+de controle.
+
+O objetivo foi praticar conceitos apresentados no livro `PHP Programação orientada a objeto: 4ª Edição Pablo Dall’Oglio` como um desafio do treinamento da [horussistem](https://www.horussistemas.com/).
 
 ## tecnologias
 * php 
