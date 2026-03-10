@@ -51,10 +51,10 @@ php -S localhost:8000
 http://localhost:8000/pessoa_list.php
 ```
 ## Progresso
-- [x] Level 1
-- [x] Level 2
-- [x] Level 3
-- [x] Level 4
-- [ ] Level 5
-- [ ] Level 6
-- [ ] Level 7
+- [X] Level 1
+- [X] Level 2
+- [X] Level 3
+- [X] Level 4
+- [X] Level 5
+- [X] Level 6
+- [X] Level 7
