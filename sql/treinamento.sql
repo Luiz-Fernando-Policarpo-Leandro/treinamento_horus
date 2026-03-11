@@ -1,0 +1,39 @@
+CREATE DATABASE IF NOT EXISTS treinamento CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE treinamento;
+
+CREATE TABLE IF NOT EXISTS estado (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sigla CHAR(2) NOT NULL UNIQUE,
+    nome VARCHAR(25) NOT NULL UNIQUE
+) ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS cidade (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL UNIQUE,
+    id_estado INT NOT NULL,
+    
+    CONSTRAINT fk_cidade_estado FOREIGN KEY (id_estado) REFERENCES estado(id)
+) ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS pessoa (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(150) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    bairro VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20),
+    email VARCHAR(100) NOT NULL UNIQUE,
+    id_cidade INT NOT NULL,
+
+    CONSTRAINT fk_id_cidade FOREIGN KEY (id_cidade) REFERENCES cidade(id)
+) ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO estado (id, sigla, nome) SELECT 1, 'AC', 'Acre' WHERE NOT EXISTS (SELECT 1 FROM estado WHERE nome = 'Acre');
+INSERT INTO cidade (id, nome, id_estado) SELECT 1, 'Rio Branco', 1 WHERE NOT EXISTS (SELECT 1 FROM cidade WHERE nome = 'Rio Branco');

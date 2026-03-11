@@ -11,15 +11,15 @@
         <label>Código</label>
         <input name="id"  readonly="1" type="text" style="width: 30%" value="{id}">
         <label>Nome</label>
-        <input name="nome" type="text" placeholder="Exemplo::.josé, maria, joão..."  style="width: 50%" value="{nome}">
+        <input name="nome" type="text" placeholder="Exemplo::.josé, maria, joão..."  style="width: 50%" value="{nome}" required>
         <label>Endereço</label>
-        <input name="endereco" type="text" placeholder="rua e número"  style="width: 50%" value="{endereco}">
+        <input name="endereco" type="text" placeholder="rua e número"  style="width: 50%" value="{endereco}" required>
         <label>Bairro</label>
-        <input name="bairro" type="text" placeholder="bairro"  style="width: 25%" value="{bairro}">
+        <input name="bairro" type="text" placeholder="bairro"  style="width: 25%" value="{bairro}" required>
         <label>Telefone</label>
-        <input name="telefone" type="text" placeholder="rua e número" style="width: 25%" value="{telefone}">
+        <input name="telefone" type="number" min="0" max="99999999999" placeholder="Exemplo::.82999999999..." style="width: 25%" value="{telefone}">
         <label>Email</label>
-        <input name="email" type="email" placeholder="example@gmail.com.br" style="width: 25%" value="{email}">
+        <input name="email" type="email" placeholder="example@gmail.com.br" style="width: 25%" value="{email}" required>
         <label>Cidade</label>
         <select name="id_cidade" style="width: 25%">
             {cidades}
