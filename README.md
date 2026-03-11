@@ -1,24 +1,36 @@
-# treinamento horus
+# Treinamento horus
+![PHP](https://img.shields.io/badge/PHP-8.4-787CB4)
+![MySQL](https://img.shields.io/badge/MySQL-Database-00618A)
+![Status](https://img.shields.io/badge/status-concluído-green)
 
 Este projeto implementa um CRUD de pessoas utilizando PHP procedural,
 com separação simples entre camada de dados, templates HTML e scripts
 de controle.
 
-O objetivo foi praticar conceitos apresentados no livro `PHP Programação orientada a objeto: 4ª Edição Pablo Dall’Oglio` como um desafio do treinamento da [horussistem](https://www.horussistemas.com/).
+O objetivo foi praticar conceitos apresentados no livro *PHP Programação orientada a objeto: 4ª Edição Pablo Dall’Oglio* como um desafio do treinamento da [Hórus Sistemas](https://www.horussistemas.com/).
 
-## detalhes
-* [Banco de Dados](/detalhes/db.md)
-
-
-## tecnologias
-* php 
-* html
-* css
-* javascript
-* Mysql 
+## Documentação
+- [Banco de Dados](/detalhes/db.md)
 
 
-## Estrutura do projeto
+## Tecnologias utilizadas
+- PHP
+- MySQL
+- HTML
+- CSS
+- JavaScript
+- Apache
+
+## Funcionalidades
+
+- Cadastro de pessoas
+- Edição de registros
+- Exclusão de registros
+- Listagem de pessoas
+- Associação de pessoas a cidades
+- Associação de cidades a estados
+
+## Diagrama do projeto
 
 ```
 📦treinamento_horus_php
@@ -81,7 +93,14 @@ PESSOA {
 ESTADO ||--o{ CIDADE : possui
 CIDADE ||--o{ PESSOA : possui
 ```
+## Funcionalidades
 
+- Cadastro de pessoas
+- Edição de registros
+- Exclusão de registros
+- Listagem de pessoas
+- Associação de pessoas a cidades
+- Associação de cidades a estados
 
 ## Como executar
 
@@ -89,9 +108,10 @@ CIDADE ||--o{ PESSOA : possui
 ```bash
 git clone https://github.com/seu-usuario/treinamento_horus
 ```
-2. Importe o banco de dados
+2. Importe o banco de dados e o 
 ```bash
-mysql -u root -p < treinamento.sql
+mysql -u < seu usuario > -p < db/treinamento.sql
+mysql -u < seu usuario > -p < db/insert.sql
 ```
 4. Inicie um servidor PHP
 ```bash

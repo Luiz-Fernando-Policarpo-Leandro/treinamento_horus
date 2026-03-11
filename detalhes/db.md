@@ -105,6 +105,40 @@ Significado:
 * Uma **cidade pode possuir várias pessoas**
 * Uma **pessoa pertence a apenas uma cidade**
 
+---
+
+# Diagrama Entidade-Relacionamento
+
+## Diagrama ER
+
+```mermaid
+erDiagram
+
+ESTADO {
+    INT id PK
+    CHAR sigla
+    VARCHAR nome
+}
+
+CIDADE {
+    INT id PK
+    VARCHAR nome
+    INT id_estado FK
+}
+
+PESSOA {
+    INT id PK
+    VARCHAR nome
+    VARCHAR endereco
+    VARCHAR bairro
+    VARCHAR telefone
+    VARCHAR email
+    INT id_cidade FK
+}
+
+ESTADO ||--o{ CIDADE : possui
+CIDADE ||--o{ PESSOA : possui
+```
 
 ---
 
