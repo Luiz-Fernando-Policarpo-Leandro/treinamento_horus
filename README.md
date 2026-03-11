@@ -61,38 +61,15 @@ O objetivo foi praticar conceitos apresentados no livro *PHP Programação orien
 
 ```
 
-## diagrama do banco de dados MYSQL
+## Estrutura do projeto
 
-## Diagrama ER
+- **classes/** → lógica de aplicação
+- **db/** → acesso ao banco de dados
+- **html/** → templates HTML
+- **css/** → estilos da interface
+- **javascript/** → scripts do frontend
+- **config/** → arquivos de configuração
 
-```mermaid
-erDiagram
-
-ESTADO {
-    INT id PK
-    CHAR sigla
-    VARCHAR nome
-}
-
-CIDADE {
-    INT id PK
-    VARCHAR nome
-    INT id_estado FK
-}
-
-PESSOA {
-    INT id PK
-    VARCHAR nome
-    VARCHAR endereco
-    VARCHAR bairro
-    VARCHAR telefone
-    VARCHAR email
-    INT id_cidade FK
-}
-
-ESTADO ||--o{ CIDADE : possui
-CIDADE ||--o{ PESSOA : possui
-```
 ## Funcionalidades
 
 - Cadastro de pessoas
@@ -102,6 +79,7 @@ CIDADE ||--o{ PESSOA : possui
 - Associação de pessoas a cidades
 - Associação de cidades a estados
 
+---
 ## Como executar
 
 1. Clone o repositório
