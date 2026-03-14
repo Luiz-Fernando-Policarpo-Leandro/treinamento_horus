@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> Listagem de pessoas </title>
+    <link href="css/list.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+
+<body>
+    <header>
+        <h1>Treinamento Horus PHP</h1>
+        <nav>
+            <ul>
+                <li><a href="index.php?class=PessoaList">Pessoas</a></li>
+                <li><a href="index.php?class=EstadoList">Estados</a></li>
+                <li><a href="index.php?class=CidadeList">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>editar </th>
+                <th>deletar</th>
+                <th> Id </th>
+                <th> Nome </th>
+                <th> Endereço </th>
+                <th> Bairro </th>
+                <th> Telefone </th>
+            </tr>
+        </thead>
+        <tbody>
+            {items}
+        </tbody>
+    </table>
+    <button onclick="window.location='index.php?class=PessoaForm'">
+         Inserir
+    </button>
+</body>
+
+</html>

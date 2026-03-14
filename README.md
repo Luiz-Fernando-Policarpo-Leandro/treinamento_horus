@@ -10,7 +10,7 @@ de controle.
 O objetivo foi praticar conceitos apresentados no livro *PHP Programação orientada a objeto: 4ª Edição Pablo Dall’Oglio* como um desafio do treinamento da [Hórus Sistemas](https://www.horussistemas.com/).
 
 ## Documentação
-- [Banco de Dados](/detalhes/db.md)
+- [Banco de Dados](/document/db.md)
 
 
 ## Tecnologias utilizadas

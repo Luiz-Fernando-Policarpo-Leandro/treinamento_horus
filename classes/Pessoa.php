@@ -1,25 +1,13 @@
 <?php
-class Pessoa
-{
-    private static $conn;
-    public static function getConnection()
-    { 
-        if (empty(self::$conn)) {
+require_once "model/ModelBase.php";
 
-            $conexao = parse_ini_file('config/livro.ini');
-            $host = $conexao['host'];
-            $name = $conexao['name'];
-            $user = $conexao['user'];
-            $pass = $conexao['pass'];
-            self::$conn = new PDO("mysql:dbname={$name};user={$user};host={$host};password={$pass}");
-            self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        return self::$conn;
-    }
+class Pessoa extends ModelBase
+{
 
     public static function save($pessoa)
     {
         $conn = self::getConnection();
+
         if (empty($pessoa['id'])) {
 
             $result = $conn->query("SELECT max(id) as next FROM pessoa");
@@ -55,20 +43,20 @@ class Pessoa
     public static function find($id)
     {
         $conn = self::getConnection();
-        $result = $conn->query("SELECT * FROM pessoa WHERE id='{$id}'");
+        $result = $conn->query("SELECT pessoa.*, cidade.id_estado FROM pessoa INNER JOIN cidade ON pessoa.id_cidade = cidade.id WHERE pessoa.id = '{$id}'");
         return $result->fetch();
     }
-    
+
     public static function all() {
-        $conn = new mysqli("localhost", "root", "", "treinamento");
+        $conn = self::getConnection();
         $result = $conn->query("SELECT * FROM pessoa ORDER BY id");
-        $list = $result->fetch_all(MYSQLI_ASSOC);
+        $list = $result->fetchAll(PDO::FETCH_ASSOC);
     
         return $list;
     } 
 
     public static function delete(int $id) {
-        $conn = new mysqli("localhost", "root", "", "treinamento");
+        $conn = self::getConnection();
         $result = $conn->query("DELETE FROM pessoa WHERE id='{$id}'");
     
         return $result; 

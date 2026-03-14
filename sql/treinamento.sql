@@ -33,7 +33,3 @@ CREATE TABLE IF NOT EXISTS pessoa (
 ) ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
-
-
-INSERT INTO estado (id, sigla, nome) SELECT 1, 'AC', 'Acre' WHERE NOT EXISTS (SELECT 1 FROM estado WHERE nome = 'Acre');
-INSERT INTO cidade (id, nome, id_estado) SELECT 1, 'Rio Branco', 1 WHERE NOT EXISTS (SELECT 1 FROM cidade WHERE nome = 'Rio Branco');

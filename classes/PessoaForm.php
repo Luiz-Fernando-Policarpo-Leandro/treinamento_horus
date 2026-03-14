@@ -1,29 +1,41 @@
 <?php
 require_once 'classes/Pessoa.php';
+require_once 'classes/Estado.php';
 require_once 'classes/Cidade.php';
 class PessoaForm
 {
     private $html;
     private array|string $data;
     public function __construct()
-    {
-        $this->html = file_get_contents('html/form.html');
-        $this->data = [
-            'id' => null,
-            'nome' => null,
-            'endereco' => null,
-            'bairro' => null,
-            'telefone' => null,
-            'email' => null,
-            'id_cidade' => null
-        ];
-        $cidades = '';
-        foreach (Cidade::all() as $cidade) {
-            $cidades .= "<option value='{$cidade['id']}'> {$cidade['nome']}
-</option>\n";
-        }
-        $this->html = str_replace('{cidades}', $cidades, $this->html);
+{
+    $this->html = file_get_contents('html/pessoa/form.html');
+
+    $this->data = [
+        'id' => null,
+        'nome' => null,
+        'endereco' => null,
+        'bairro' => null,
+        'telefone' => null,
+        'email' => null,
+        'id_cidade' => null,
+        'id_estado' => null
+    ];
+
+    $estados = '';
+
+    foreach (Estado::all() as $estado) {
+
+        $selected = $estado['id'] == $this->data['id_estado'] ? 'selected' : '';
+
+        $estados .= "<option value='{$estado['id']}' $selected>
+                        {$estado['nome']}
+                     </option>";
     }
+
+    $this->html = str_replace('{estados}', $estados, $this->html);
+}
+
+    
     public function edit($param)
     {
         try {
@@ -47,18 +59,31 @@ class PessoaForm
     }
     public function show()
     {
+        $this->html = str_replace("option value='{$this->data['id_estado']}'",
+        "option selected=1 value='{$this->data['id_estado']}'", $this->html);
+        
+        $cidades = '';
+        if (!empty($this->data['id_estado'])) {
+
+            foreach (Cidade::all_cidades($this->data['id_estado']) as $cidade) {
+
+                $selected = $cidade['id'] == $this->data['id_cidade'] ? 'selected' : '';
+
+                $cidades .= "<option value='{$cidade['id']}' $selected>
+                                {$cidade['nome']}
+                            </option>";
+            }
+        }
+        $this->html = str_replace('{cidades}', $cidades, $this->html);
+
         $this->html = str_replace('{id}', $this->data['id'], $this->html);
         $this->html = str_replace('{nome}', $this->data['nome'], $this->html);
         $this->html = str_replace('{endereco}', $this->data['endereco'], $this->html);
         $this->html = str_replace('{bairro}', $this->data['bairro'], $this->html);
         $this->html = str_replace('{telefone}', $this->data['telefone'], $this->html);
         $this->html = str_replace('{email}', $this->data['email'], $this->html);
-        $this->html = str_replace('{id_cidade}', $this->data['id_cidade'], $this->html);
-        $this->html = str_replace(
-            "option value='{$this->data['id_cidade']}'",
-            "option selected=1 value='{$this->data['id_cidade']}'",
-            $this->html
-        );
+
         print $this->html;
     }
+
 }

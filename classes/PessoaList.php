@@ -5,7 +5,7 @@ class PessoaList
     private $html;
     public function __construct()
     {
-        $this->html = file_get_contents('html/list.html');
+        $this->html = file_get_contents('html/pessoa/list.html');
     }
     public function delete($param)
     {
@@ -22,7 +22,7 @@ class PessoaList
             $pessoas = Pessoa::all();
             $items = '';
             foreach ($pessoas as $pessoa) {
-                $item = file_get_contents('html/item.html');
+                $item = file_get_contents('html/pessoa/item.html');
                 $item = str_replace('{id}', $pessoa['id'], $item);
                 $item = str_replace('{nome}', $pessoa['nome'], $item);
                 $item = str_replace('{endereco}', $pessoa['endereco'], $item);

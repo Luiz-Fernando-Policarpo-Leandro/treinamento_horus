@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title> Cadastro de pessoa </title>
+    <link href="css/form.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+
+<body>
+    <a href="index.php?class=PessoaList" style="font-size: 20px;" >voltar para lista</a>
+    <form enctype="multipart/form-data" method="post" action="index.php?class=PessoaForm&method=save">
+        <label>Código</label>
+        <input name="id"  readonly="1" type="text" style="width: 30%" value="{id}">
+        <label>Nome</label>
+        <input name="nome" type="text" placeholder="Exemplo::.josé, maria, joão..."  style="width: 50%" value="{nome}" required>
+        <label>Endereço</label>
+        <input name="endereco" type="text" placeholder="rua e número"  style="width: 50%" value="{endereco}" required>
+        <label>Bairro</label>
+        <input name="bairro" type="text" placeholder="bairro"  style="width: 25%" value="{bairro}" required>
+        <label>Telefone</label>
+        <input name="telefone" type="number" min="0" max="99999999999" placeholder="Exemplo::.82999999999..." style="width: 25%" value="{telefone}">
+        <label>Email</label>
+        <input name="email" type="email" placeholder="example@gmail.com.br" style="width: 25%" value="{email}" required>
+        
+        <label for="id_estado">Estado</label>
+        <select name="id_estado" style="width: 25%">
+            <option selected=1 disabled>Selecione um estado</option>
+            {estados}
+        </select>
+
+        <label for="id_cidade">Cidade</label>
+        <select name="id_cidade" id="cidade" style="width: 25%">
+            <option selected=1 disabled>Selecione um estado primeiro</option>
+            {cidades}
+        </select>
+
+        <input type="submit" value="Salvar" style="width: 25%; background-color: #4CAF50; color: white; font-size: 16px; border: none; border-radius: 4px; cursor: pointer;">
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            document.querySelector("select[name='id_estado']")
+            .addEventListener("change", function() {
+
+                let estadoId = this.value;
+
+                fetch("index.php?utils=cidades", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: "id_estado=" + estadoId
+                })
+                .then(res => res.json())
+                .then(cidades => {
+
+                    let select = document.getElementById("cidade");
+                    select.innerHTML = "";
+
+                    cidades.forEach(c => {
+
+                        let opt = document.createElement("option");
+
+                        opt.value = c.id;
+                        opt.textContent = c.nome;
+
+                        select.appendChild(opt);
+
+                    });
+
+                });
+
+        });
+
+    });
+    </script>
+</body>
+
+</html>

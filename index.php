@@ -1,23 +1,76 @@
 <?php
 
-spl_autoload_register(function($class) {
-    $class = "./classes/" . $class;
+spl_autoload_register(function ($class) {
 
-    if (file_exists($class.'.php')) {
-        require_once $class.'.php';
+    $path = __DIR__ . "/classes/{$class}.php";
+
+    if (file_exists($path)) {
+        require_once $path;
     }
+
 });
 
 
-$classe = $_REQUEST['class'] ?? "PessoaList";
+$classe = $_GET['class'] ?? Null;
+$utils  = $_GET['utils'] ?? null;
+if (empty($utils) && empty($classe)) {
+    header("Location: index.php?class=Home");
+    exit;
+}
 
-$method = isset($_REQUEST['method']) ? $_REQUEST['method'] : null;
+$method = $_GET['method'] ?? null;
 
-if (class_exists($classe)) {
+
+/*
+|--------------------------------------------------------------------------
+| ROUTE: UTILS (AJAX endpoints)
+|--------------------------------------------------------------------------
+*/
+
+if ($utils) {
+    $file = __DIR__ . "/utils/" . basename($utils) . ".php";
+
+    if (!file_exists($file)) {
+        http_response_code(404);
+        exit("Endpoint não encontrado");
+    }
+
+    require_once $file;
+    exit;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ROUTE: CONTROLLERS
+|--------------------------------------------------------------------------
+*/
+
+if ($classe) {
+
+    if (!class_exists($classe)) {
+        http_response_code(404);
+        exit("Classe não encontrada");
+    }
 
     $pagina = new $classe($_REQUEST);
-    if (!empty($method) and (method_exists($classe, $method))) {
+
+    if ($method) {
+
+        if (!method_exists($pagina, $method)) {
+            http_response_code(404);
+            exit("Método não encontrado");
+        }
+
         $pagina->$method($_REQUEST);
     }
-    $pagina->show();
+
+    if (method_exists($pagina, 'show')) {
+        $pagina->show();
+    }
+
+    exit;
 }
+
+
+echo "Página não encontrada";

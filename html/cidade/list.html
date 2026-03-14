@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> Listagem de Cidades </title>
+    <link href="css/list.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>editar </th>
+                <th>deletar</th>
+                <th> Id </th>
+                <th> Nome </th>
+                <th> Estado </th>
+            </tr>
+        </thead>
+        <tbody>
+            {items}
+        </tbody>
+    </table>
+    <button onclick="window.location='index.php?class=CidadeForm'">
+         Inserir
+    </button>
+</body>
+
+</html>
